@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        html {
+            background-color: #f5f6fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-header {
+            background-color: #24292e;
+            height: 50px;
+            display: flex;
+            justify-content: space-around;
+
+        }
+
+        .header-left {
+            width: 65%;
+            display: flex;
+
+        }
+
+        .sd-box {
+            color: white;
+            display: flex;
+
+            width: 25%;
+            align-items: center;
+            font-size: 13px;
+            /* margin-left: 100px; */
+        }
+
+        .sd {
+            border-radius: 50%;
+            background: radial-gradient(#3187fd, #20bff9);
+            height: 30px;
+            width: 30px;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+        }
+
+        .sd-wan {
+            margin-right: 10px;
+        }
+
+        .index {
+            background-color: #337ab7;
+        }
+
+        .nav-select {
+            display: flex;
+            justify-content: space-around;
+            width: 60%;
+
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            /* text-align: center; */
+            font-size: 13px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 85px;
+
+
+        }
+
+        a img {
+            width: 18px;
+            height: 18px;
+
+        }
+
+
+        /* 头部右边 */
+        .header-right {
+            display: flex;
+            align-items: center;
+            color: white;
+            justify-content: space-between;
+            width: 13%;
+            font-size: 13px;
+
+        }
+
+        .avatar {
+            border-radius: 50%;
+            height: 23px;
+            width: 23px;
+            margin: 2px 0 0 30px;
+        }
+
+        .off {
+            height: 13px;
+            width: 13px;
+        }
+
+        .header-right span {
+            margin-right: 10px;
+        }
+
+        /* 内容部分 */
+        .content {
+            background-color: #f5f6fa;
+            /* width: 100%;   */
+            /* width: 80%; */
+
+
+        }
+
+        .content-header {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin: 8px 0 10px 50px;
+            padding: 0 10px;
+           
+        }
+
+        .home {
+            width: 20px;
+            height: 20px;
+          
+            
+        }
+
+        .author {
+            /* background-color: #fff; */
+            display: flex;
+            justify-content: space-between;
+            width: 88%;
+            height: 170px;
+            margin: 5px 0 0px 55px;
+
+        }
+
+        .author-left {
+            width: 75%;
+            background-color: #fff;
+            height: 160px;
+            padding: 0 0  10px 0;
+          
+            
+
+
+        }
+
+        .author-left.title {
+            font-weight: bold;
+            margin-left: 20px;
+            font-size: 14px;
+            height: 20px;
+        }
+
+        .author-avatar.box {
+            height: 70px;
+            display: flex;
+            justify-content: space-around;
+            width: 700px;
+        }
+
+        .author-avatar {
+            height: 70px;
+            width: 70px;
+            border-radius: 50%;
+            margin-left: 20px;
+        }
+
+        .self-business {
+            /* width: 60%;*/
+     
+
+            width: 500px;
+            display: flex;
+            margin-left: 40px;
+
+
+        }
+
+        .self-order {
+            height: 80px;
+            width: 200px;
+            border-right: 1px solid #ececec;
+            /* justify-content: center; */
+            text-align: center;
+            align-content: space-around;
+        }
+
+        .self-order:nth-child(5) {
+            border: 0 solid #000;
+        }
+
+        .self-order span {
+            font-size: 13px;
+        }
+
+        .status {
+            height: 20px;
+            width: 60px;
+            border-radius: 4px;
+            background-color: #fd6002;
+            text-align: center;
+            font-size: 13px;
+            color: white;
+            margin: 22px auto;
+        }
+
+        .map-box {
+            height: 40px;
+            width: 40px;
+            margin: 22px auto;
+        }
+
+        .map {
+            height: 40px;
+            width: 40px;
+        }
+
+        .cart-box {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            background-color: #fee8eb;
+            line-height: 40px;
+            text-align: center;
+            font-size: 0;
+            margin: 22px auto;
+
+
+        }
+
+        .cart {
+            height: 30px;
+            width: 30px;
+            vertical-align: middle;
+        }
+
+        .welcome {
+            font-size: 12px;
+            margin-left: 60px;
+            color: #797979;
+        }
+
+        .author-right {
+            background-color: #fff;
+            width: 300px;
+            margin-left: 20px;
+            height: 170px;
+        }
+
+        .author-right.title {
+            font-weight: bold;
+            margin-left: 21px;
+            width: 100px;
+            font-size: 14px;
+            height: 20px;
+
+        }
+
+        .company-info {
+            height: 90px;
+            width: 90px;
+            margin-left: 5px;
+        }
+
+        .company-info.box {
+            display: flex;
+            font-size: 13px;
+            justify-content: space-between;
+            width: 300px;
+
+        }
+
+        .detail {
+            margin: 2px 30px 0 0;
+            height: 160px;
+        }
+
+        .detail p {
+            margin: 5px 0;
+        }
+
+        .table {
+
+            background-color: #fff;
+            width: 88%;
+            margin-left: 55px;
+            
+        }
+
+        .table-tite {
+            font-weight: bold;
+            font-size: 14px; 
+            padding: 15px 0 0 0;  
+          margin-left: 30px;
+        }
+
+        .table-header {
+            background-color: #337ab7;
+            border-radius: 2px;
+            color: white;
+            /* display: flex; */
+            height: 33px;
+            line-height: 33px;
+            font-size: 14px;
+            width: 1250px;
+            margin: 0 auto;
+        }
+        .titleContent{
+           
+            text-align: center;
+        }
+
+        .detail-info {
+
+            color: #797979;
+
+
+
+        }
+
+        .select-box {
+            height: 20px;
+            width: 20px;
+            line-height: 20px;
+            text-align: center;
+            border: 1px solid #dddddd;
+        }
+
+        .select-box:nth-child(2) {
+            background-color: #337ab7;
+            color: white;
+        }
+
+        .select-box img {
+            height: 13px;
+            width: 13px;
+        }
+
+        .select-jump {
+            display: flex;
+            color: #797979;
+        }
+
+        .footer {
+            margin: 15px auto 0;
+            display: flex;
+            justify-content: space-between;
+            width: 1250px;
+            font-size: 12px;
+        }
+
+        .jump-detail {
+            margin-top: 1.5px;
+            margin-left: 0.5px;
+            font-size: 12px;
+        }
+
+        #cars {
+            background-color: #337ab7;
+            color: white;
+            font-size: 12px;
+
+        }
+
+        
+        /* new */
+        .detailContent{
+            border-bottom: 1px solid #f4f4f4;
+            
+            width: 1250px;
+            /* margin: 0 auto; */
+            /* height: 35px; */
+            font-size: 13px;
+            color:#797979;
+        }
+        .detailContent:nth-child(6){
+            border-bottom: 1px solid #dddddd;
+        }
+        .firstLine{
+          
+            text-align: center;
+            /* line-height: 35px; */
+            
+            
+         
+        }
+        .secondLine{
+            
+            text-align:center;
+            /* line-height: 35px; */
+            /* margin-right: 60px; */
+           
+
+
+            
+        }
+        .thirdLine{
+         
+            /* line-height: 35px; */
+            text-align: center;
+            font-size:10px;
+
+        }
+        .fourthLine{
+          
+            /* line-height: 35px; */
+            text-align: center;
+
+        }
+        .fifthLine{
+           
+            /* line-height: 35px; */
+            text-align: center;
+            font-size:10px;
+
+
+        }
+        .sixthLine{
+          
+            /* line-height: 35px; */
+            text-align: center;
+            width: 200px;
+          color: white;
+
+
+        }
+        .sevenLine{
+           
+            /* line-height: 35px; */
+            text-align: center;
+            /* width: 200px; */
+          color: white;
+
+
+        }
+
+
+   
+        footer {
+            background-color: #fff;
+            margin-top: 15px;
+        }
+
+        .company-copyright {
+            display: flex;
+            justify-content: space-between;
+            height: 45px;
+            font-size: 13px;
+
+
+        }
+
+        .copyright-left {
+            display: flex;
+            width: 278px;
+            justify-content: flex-start;
+            align-items: center;
+            line-height: 45px;
+            height: 45px;
+            margin-left: 30px;
+
+        }
+
+        .chinaUnicom {
+            text-decoration: none;
+            color: #33a6dc;
+            font-weight: bold;
+            margin-right: 3px;
+        }
+        .C{
+            height: 12px;
+            width: 12px;
+            margin: auto 0;
+            
+        }
+        .copyright-box{
+            display: flex;
+            height: 45px;
+           
+        }
+        .year{
+            margin-right: 3px;
+        }
+        .company-right{
+            width: 70px;
+            height: 45px;
+            display: flex;
+            margin-right: 7px;
+        }
+        .banben{
+            margin: auto 0;
+
+        }
+        table{
+            border-collapse:collapse;
+            margin: 0 auto;
+            
+        }
+        th{
+            padding: 5px 60px ;
+
+        }
+        td{
+            height: 35px;
+        }
+        #solving{
+            background-color: #4482ff;
+          border-radius: 4px;
+          padding: 2px 10px;
+         
+          display: inline-block;
+        
+        }
+        #normal{
+            background-color: #36b37e;
+          border-radius: 4px;
+          padding: 2px 5px;
+         
+          display: inline-block;
+         
+        }
+        #stop{
+            background-color: #f75765;
+           
+            width: 12px;
+            padding: 1px 4px;
+            border-radius: 4px;
+            margin: 2px 0;
+           
+
+            
+        }
+        .stop{
+            height: 12px;
+            width: 12px;
+            vertical-align: -1px;
+            
+        }
+        .iconDiretion{
+            vertical-align: -2px;
+        }
+        
+    </style>
+</head>
+
+<body>
+
+    <header class="nav-header">
+        <!-- 头部左边 -->
+        <div class="header-left">
+            <div class="sd-box">
+                <div class="sd">SD</div>
+                <div class="sd-wan">SD-WAN</div>
+                <div class="zhixuan">智选专线平台</div>
+            </div>
+            <!-- 导航选择栏 -->
+
+            <nav class="nav-select">
+                <a href="" class="index">
+                    <img src="./assets/index1.png" alt="">
+                    首页
+                </a>
+
+
+                <a href="" class="order-manage">
+                    <img src="./assets/order2.png" alt="">
+                    订单管理
+                </a>
+
+                <a href="" class="visiable-view">
+                    <img src="./assets/keshihua.png" alt="">
+                    可视化视图
+                </a>
+
+                <a href="" class="net">
+                    <img src="./assets/net.png" alt="">
+                    网络拓扑
+                </a>
+
+                <a href="" class="form-account">
+                    <img src="./assets/baobiao.png" alt="">
+                    报表统计
+                </a>
+            </nav>
+
+        </div>
+
+        <!-- 头部右边 -->
+        <div class="header-right">
+            <img class="avatar" src="./assets/avatar.jpeg" alt="">
+            <span>goldenuser</span>
+            <img class="off" src="./assets/off.png" alt="">
+        </div>
+    </header>
+    <div class="content">
+        <div class="content-header">
+
+            <img src="./assets/home.png" alt="" class="home">
+            <h2 >首页</h2>
+        </div>
+
+        <!-- 账户框 -->
+        <div class="author">
+            <!-- 账户框左边 -->
+            <div class="author-left">
+                <p class="author-left title">办理信息</p>
+
+                <div class="author-avatar box">
+
+
+                    <img src="./assets/avatar.jpeg" alt="" class="author-avatar">
+
+                    <div class="self-business">
+
+                        <div class="self-order">
+                            <span>订单状态</span>
+                            <p class="status">处理中</p>
+                        </div>
+                        <div class="self-order">
+                            <span>订单数量</span>
+                            <h3>153</h3>
+                        </div>
+                        <div class="self-order">
+
+                            <span>产品数量</span>
+                            <h3>109</h3>
+                        </div>
+                        <div class="self-order">
+                            <span>可视化视图</span>
+                            <div class="map-box">
+                                <img src="./assets/visiable.png" alt="" class="map">
+                            </div>
+                        </div>
+                        <div class="self-order">
+                            <span>开始订购</span>
+                            <div class="cart-box">
+                                <img src="./assets/cart.png" alt="" class="cart">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="welcome">欢迎您，goldenuser</p>
+            </div>
+            <!-- 账户框右边 -->
+            <div class="author-right">
+                <p class="author-right title">
+                    企业信息
+                </p>
+                <div class="company-info box">
+                    <img src="./assets/company-info.jpeg" alt="" class="company-info">
+                    <div class="detail">
+
+                        <p>企业名称:ChinaUnion</p>
+                        <p>经办人:goldenuser</p>
+                        <p>手机号码:18711111111</p>
+                        <p>邮箱:maqw@aisainfo.com</p>
+                        <p>公司地址:首体南路9号</p>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div class="table" >
+            <p class="table-tite">已订购信息</p>
+
+      
+
+            
+            <table class="table-content" cellspacing="40">
+                <tr class="table-header">
+
+                    <th class="titleContent">组网名称</th>
+                    <th class="titleContent">产品类型</th>
+                    <th class="titleContent">更改时间</th>
+                    <th class="titleContent">生效时间</th>
+                    <th class="titleContent">到期时间</th>
+                    <th class="titleContent">业务状态</th>
+                    <th class="titleContent">操作</th>
+
+                </tr>
+                <tr class="detailContent">
+                    <td class="firstLine">联通-徐玉龙_0109</td>
+                    <td class="secondLine">SD-WAN智选专线</td>
+                    <td class="thirdLine">2019-07-03</td>
+                    <td class="fourthLine">-</td>
+                    <td  class="fifthLine">2022-07-24</td>
+                    <td  class="sixthLine"><span id="solving">处理中</span> </td>
+                    <td class="sevenLine" style="color:#797979">处理中</td>
+                </tr>
+
+                <tr class="detailContent">
+                        <td class="firstLine">联通-徐玉龙_0079</td>
+                        <td class="secondLine">SD-WAN智选专线</td>
+                        <td class="thirdLine">2019-06-24</td>
+                        <td class="fourthLine">-</td>
+                        <td class="fifthLine">2021-06-26</td>
+                        <td class="sixthLine"><span id="normal">正常使用</span></td>
+                        <td class="sevenLine">
+                                <span id="stop" style="background-color:#f39c12"><img src="./assets/read.png" class="stop" alt=""> <span>终止</span></span>
+                                <span id="stop"><img src="./assets/stop.png" class="stop" alt=""> <span>终止</span></span>
+
+                            <span id="stop" style="background-color:#b067e6"><img src="./assets/stop.png" class="stop" alt=""> <span>终止</span></span>
+
+                        </td>
+                </tr>
+
+                    <tr class="detailContent">
+                            <td class="firstLine">联通-徐玉龙_0079</td>
+                            <td class="secondLine">SD-WAN智选专线</td>
+                            <td class="thirdLine">2019-06-24</td>
+                            <td class="fourthLine">-</td>
+                            <td class="fifthLine">2021-06-26</td>
+                            <td class="sixthLine"><span id="normal">正常使用</span> </td>
+                            <td class="sevenLine">
+                                    <span id="stop" style="background-color:#f39c12"><img src="./assets/read.png" class="stop" alt=""> <span>终止</span></span>
+                                    <span id="stop"><img src="./assets/stop.png" class="stop" alt=""> <span>终止</span></span>
+
+                                <span id="stop" style="background-color:#b067e6"><img src="./assets/stop.png" class="stop" alt=""> <span>终止</span></span>
+
+                            </td>
+                    </tr>
+
+                        <tr class="detailContent">
+                                <td class="firstLine">联通-徐玉龙_0079</td>
+                                <td class="secondLine">SD-WAN智选专线</td>
+                                <td class="thirdLine">2019-06-26   </td>
+                                <td class="fourthLine">-</td>
+                                <td class="fifthLine">2021-06-26</td>
+                                <td class="sixthLine">
+                                    <span id="solving">处理中</span>      </td>
+                                <td class="sevenLine"  style="color:#797979">处理中</td>
+                        </tr>
+
+                            <tr class="detailContent">
+                                    <td class="firstLine">联通-徐玉龙_0079</td>
+                                    <td class="secondLine">SD-WAN智选专线</td>
+                                    <td class="thirdLine">2019-07-03</td>
+                                    <td class="fourthLine">-</td>
+                                    <td class="fifthLine">2022-07-24</td>
+                                    <td class="sixthLine"><span id="normal">正常使用</span></td>
+                                    <td class="sevenLine">
+                                            <span id="stop" style="background-color:#f39c12"><img src="./assets/read.png" class="stop" alt=""> <span>终止</span></span>
+                                            <span id="stop"><img src="./assets/stop.png" class="stop" alt=""> <span>终止</span></span>
+
+                                        <span id="stop" style="background-color:#b067e6"><img src="./assets/stop.png" class="stop" alt=""> <span>终止</span></span>
+                                    </td>
+                            </tr>
+
+
+
+
+              
+            </table>
+
+            
+            <div class="footer">
+
+
+                <p class="jump-detail">第1-5条，总109条&nbsp;每条显示<select id="cars">
+                        <option value="1">5</option>
+                        <option value="2">4</option>
+                        <option value="3">3</option>
+                        <option value="4">2</option>
+                        <option value="5">1</option>
+                    </select>条记录</p>
+                <div class="select-jump">
+                    <div class="select-box">
+                        <img class="iconDiretion" src="./assets/left.png" alt="">
+                    </div>
+                    <div class="select-box">1</div>
+                    <div class="select-box">2</div>
+                    <div class="select-box">3</div>
+                    <div class="select-box">4</div>
+                    <div class="select-box">5</div>
+                    <div class="select-box">...</div>
+                    <div class="select-box">22</div>
+                    <div class="select-box"> <img class="iconDiretion" src="./assets/right.png" alt=""></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="company-copyright">
+            <span class="copyright-left">
+                <h5 class="copyright-box">Copyright &nbsp;
+                    <img src="./assets/copyright.png" alt="" class="C">
+                    <span class="year"> &nbsp;2019</span>
+                </h5>
+                <a href="#" target="_blank" class="chinaUnicom">China&nbsp;Unicom</a>
+                <span>.&nbsp;All&nbsp;rights&nbsp;reserved.</span>
+            </span>
+            <span class="company-right">
+                <h5>Version</h5>
+                <span class="banben">&nbsp;2.0.0</span>
+            </span>
+        </div>
+
+
+    </footer>
+</body>
+
+</html>
