@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+
+    <title>Document</title>
+</head>
+<body>
+    <!-- <script src="./index.js"></script> -->
+    <script>
+        
+        var dataResponse = {"users":[{"id":3136195,"slug":"6810a6332de9","nickname":"梅拾璎","avatar_source":"http://upload.jianshu.io/users/upload_avatars/3136195/484e32c3504a.jpg","total_likes_count":28306,"total_wordage":278071,"is_following_user":false},{"id":3343569,"slug":"b3b2c03354f3","nickname":"吴晓布","avatar_source":"http://upload.jianshu.io/users/upload_avatars/3343569/6940ee65-036f-4b7a-9935-5915d9b67d14.jpg","total_likes_count":23943,"total_wordage":695393,"is_following_user":false},{"id":14715425,"slug":"c5a2ce84f60b","nickname":"简书钻首席小管家","avatar_source":"http://upload.jianshu.io/users/upload_avatars/14715425/e0668349-8c75-43db-8a9d-c388e5f00d0d.jpg","total_likes_count":144744,"total_wordage":185732,"is_following_user":false},{"id":2587459,"slug":"82854a3500fc","nickname":"穿着prada挤地铁","avatar_source":"http://upload.jianshu.io/users/upload_avatars/2587459/9f4cfc0f-88b8-420c-b36e-9741e1191644.jpg","total_likes_count":5382,"total_wordage":342384,"is_following_user":false},{"id":13213889,"slug":"080bb4eac1c9","nickname":"无限猴子","avatar_source":"http://upload.jianshu.io/users/upload_avatars/13213889/7314c5cc-ca7f-4542-b914-2c8dffaf324d.jpg","total_likes_count":2157,"total_wordage":401776,"is_following_user":false}],"total_count":29003}
+    $.ajax({
+        type:'get', 
+        url:'https://www.jianshu.com/users/recommended?seen_ids=&count=5&only_unfollowed=true',
+        contentType:'application/json |application/x-www-form-urlencoded',
+        // data:
+        success:response=>{
+            console.log(response)
+        }
+    })
+    
+    
+    
+    </script>
+</body>
+</html>

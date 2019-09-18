@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var data = JSON.stringify({"Request":{"BusiCode":"AddressSearch","BusiParams":[{"search_type":"allProvince"}]}})
+       $(document).ready(
+           function ()  {
+               $.ajax({
+                    type:'post',
+                    url:'http://10.21.19.86:8080/sdc/so_dc_address',
+                    // Request:{"BusiCode":"AddressSearch","BusiParams":[{"search_type":"allProvince"}]},
+                    // dataType:'text',
+                    contentType:'application/json',
+                    data:data,
+                    success:(res)=>{
+                        console.log(res)
+                        document.write(res.data)
+                
+                    },
+                    error:(err)=>{
+                        console.log(err)
+                    }
+               })
+            })
+        </script>
+</body>
+</html>
