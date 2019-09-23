@@ -1,22 +1,40 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HotPlaying from '@/components/hotPlaying'
-import WillPlay from '@/components/WillPlay'
-
+import Weather from '@/components/weather'
+import Mine from '@/components/mine'
+import Select from '@/components/childrenPages/select/select'
 
 Vue.use(Router)
 
 export default new Router({
+mode:'history',
   routes: [
+
     {
-      path: '/',
-      name: 'HotPlaying',
-      component: HotPlaying
+      path: '/weather',
+      name: 'Weather',
+      component: Weather,
+      // children:[
+      //   {
+      //     path:'select',
+      //     component:Select
+      //   }
+      // ]
+
+
     },
     {
-      path: '/willPlay',
-      name: 'WillPlay',
-      component: WillPlay
+      path:'/weather/select',
+      name:'Select',
+      component:Select,
+      // children:[{
+
+      // }]
+    },
+    {
+      path: '/mine',
+      name: 'Mine',
+      component: Mine
     }
   ]
 })

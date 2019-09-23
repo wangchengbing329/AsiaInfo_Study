@@ -8,5 +8,21 @@
   <body>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <script>
+    function setRootFontSize() {
+      /*获取屏幕的宽度*/
+      let width = document.documentElement.clientWidth || document.body.clientWidth
+      
+      if (width < 414) {
+        document.documentElement.style.fontSize = width / 375 * 16 + 'px'
+      }else {
+        document.documentElement.style.fontSize = '16px'
+      }
+    }
+    setRootFontSize()
+    window.addEventListener('resize', function () {
+      setRootFontSize()
+    }, false)
+    </script>
   </body>
 </html>

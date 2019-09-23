@@ -11,13 +11,7 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api':{
-        target:'https://api.douban.com/v2/movie',//后端接口地址
-        changeOrigin:true,//是否允许跨域
-        pathRewrite:{
-          '^/api':'/',//重写
-        }
-      }
+     
     },
 
     // Various Dev Server settings
