@@ -1,7 +1,7 @@
 <template>
   <div id="select-page">
     <!-- 点编辑之前的页面 -->
-    <div class="noEdit" v-if="!isEdit">
+    <div class="noEdit" v-if="!isEdit" key=1>
       <!-- 头部 -->
       <div class="select-header">
         <img
@@ -11,7 +11,7 @@
           class="icon"
         />
         <!-- <svg @click="goBackToWeather" t="1569221989765" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1850" width="64" height="64"><path d="M563.591 535.628l289.17-287.604c13.666-13.636 13.726-35.699 0.12-49.334-13.634-13.756-35.637-13.756-49.303-0.18l-289.2 287.724L227.646 198.66c-13.545-13.575-35.669-13.696-49.304-0.06-13.635 13.574-13.665 35.668-0.06 49.303l286.612 287.545-288.99 287.484c-13.665 13.575-13.726 35.639-0.15 49.334 6.832 6.893 15.742 10.294 24.712 10.294a34.8 34.8 0 0 0 24.621-10.173l289.08-287.545 289.29 290.193c6.833 6.893 15.743 10.295 24.713 10.295 8.91 0 17.819-3.402 24.591-10.174 13.636-13.635 13.666-35.699 0.06-49.334l-289.23-290.194z m0 0" p-id="1851" fill="#ffffff"></path></svg> -->
-        <div @click="edit" class="select-header-text">编辑</div>
+        <div @click="isEdit = !isEdit" class="select-header-text">编辑</div>
       </div>
 
       <!-- 内容定位部分 -->
@@ -37,20 +37,49 @@
     </div>
 
     <!-- 点编辑之后的样子 -->
-    <div v-else class="select-another-header">
+    <div v-else class="select-another-header" key =2>
+      <div class="another-header" @click="isEdit = !isEdit">完成</div>
+      <div class="another-header-content">
+        <!-- AHC === another-header-content 太长了，换一下 -->
+        <div class="AHC-left">
+
+          <div class="cancelCircle"  @click="deleteCity" ref="rotateCancel">
+            <transition name="rotateLine">
+            <div v-if="isSure" class="cancelLine"></div>
+            <div v-else class="justifyLine"></div></transition>
+          </div>
+
+          <div class="AHC-localCity">{{localCity}}市</div>
+        </div>
+
+
+        <div class="AHC-right" v-if="isSure">
+          <div class="AHC-right-text">{{isSure?'已':'设'}}为提醒城市</div>
+          <div class="icon-select"></div>
+        </div>
+        <div v-else class="deleteIcon">删除</div>
+      </div>
 
     </div>
-
-
 
     <!-- 最下面添加城市部分 -->
-    <div class="addCity">
+    <div class="addCity" @click="addCity">
       <div class="addCity-img">
-        <img src="../../../assets/imgs/page-weather/add.png" alt="">
-        添加城市
+        <img src="../../../assets/imgs/page-weather/add.png" alt />
       </div>
+      <div class="addCity-text">添加城市</div>
     </div>
+
+
+
+
+
+
   </div>
+
+
+
+
 </template>
 
 <script>
@@ -59,7 +88,9 @@ export default {
     return {
       localCity: "南京",
       temperature: "27",
-      isEdit: false
+      isEdit: false,
+      isSure: true,
+
     };
   },
   methods: {
@@ -67,9 +98,41 @@ export default {
       return this.$router.go(-1);
     },
     edit() {
-      // this.$router.push()
+      let isSure = this.isSure;
+      isSure = true;
+      return isSure
     },
-    geolocation() {}
+
+    geolocation () {
+      this.$set(this.data(),'isEdit',true)
+      console.log(this.isEdit)
+
+    },
+    deleteCity () {
+      this.isSure = !this.isSure
+    //  let rotateCancel =  this.$refs.rotateCancel
+    //  console.log(rotateCancel)
+    //  rotateCancel.style.transform = "rotate(180deg)"
+    },
+    addCity () {
+      this.$router.push('/weather/select/addcity')
+    }
+  },
+  computed: {
+    // isEdit() {
+    //   let edit = this.edit
+    //   const editChange = new Promise(edit)
+    //   editChange.then((res)=>{
+    //     console.log(res)
+    //   })
+    //   let isSure = this.isSure;
+    //   // console.log(isSure);
+    //   if (isSure) {
+    //     return true;
+    //   } else {
+    //     return false;
+    //   }
+    // }
   }
 };
 </script>
@@ -154,4 +217,121 @@ export default {
   font-size: 0.9rem;
   color: #8b9ab4;
 }
+
+/* 添加城市部分 */
+.addCity {
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+.addCity-img {
+  border-radius: 50%;
+  background-color: #5c759c;
+  height: 1.7rem;
+  width: 1.7rem;
+  /* margin: auto; */
+  text-align: center;
+  margin-top: 0.2rem;
+}
+.addCity-img img {
+  height: 1.5rem;
+  width: 1.5rem;
+
+  vertical-align: middle;
+}
+.addCity-text {
+  font-size: 1.2rem;
+  letter-spacing: 0.1rem;
+  margin-left: 1rem;
+}
+.select-another-header{
+}
+.another-header{
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 4rem;
+  margin-right: 2rem;
+}
+.another-header-content{
+  height: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+background-color: rgba(24,43,97,.3);
+
+}
+.AHC-left{
+   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 0.5rem;
+}
+.cancelCircle{
+  background-color: red;
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+}
+.cancelLine{
+  background-color: #fff;
+
+  height: .2rem;
+  width: 1.1rem;
+}
+.justifyLine{
+   background-color: #fff;
+
+  height: 1.1rem;
+  width: .2rem;
+}
+.AHC-localCity{
+  font-size: 1.2rem;
+  letter-spacing: 0.1rem;
+  margin-left: 1rem;
+}
+.AHC-right{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1rem;
+}
+.icon-select{
+  height: 0.2rem;
+  width: 1.2rem;
+  border-top: .6rem  double #979a9c;
+  border-bottom:0.2rem solid #979a9c;
+}
+.AHC-right-text{
+  margin-right: 1rem;
+  border-radius: 4px;
+  background-color: #4195ea;
+  height: 2rem;
+  width: 7rem;
+  text-align: center;
+  line-height: 2rem;
+}
+.deleteIcon{
+
+background-color: red;
+border-radius: 4px;
+text-align: center;
+height: 2.2rem;
+width: 4rem;
+margin-right: 1rem;
+line-height: 2rem;
+}
+.rotateLine-enter-active,.rotateLine-leave-to{
+  transform: rotateZ(180deg)
+}
+
 </style>
