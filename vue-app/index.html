@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+      <script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=TC3BZ-2NT3U-WH6VV-BJS3R-6DIMS-P6FF7"></script>
     <title>vue-app</title>
   </head>
   <body>
@@ -12,7 +14,7 @@
     function setRootFontSize() {
       /*获取屏幕的宽度*/
       let width = document.documentElement.clientWidth || document.body.clientWidth
-      
+
       if (width < 414) {
         document.documentElement.style.fontSize = width / 375 * 16 + 'px'
       }else {

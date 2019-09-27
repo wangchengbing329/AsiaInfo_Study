@@ -23,7 +23,7 @@
       </div>
       <!-- 内容本地天气显示部分 -->
       <div class="select-section-localWeather">
-        <div class="select-section-localWeather-localCity">{{localCity}}市</div>
+        <div class="select-section-localWeather-localCity">{{isDetail?district:localCity}}</div>
 
         <div class="localWeather-detail">
           <div class="localWeather-detail-top">
@@ -49,7 +49,7 @@
             <div v-else class="justifyLine"></div></transition>
           </div>
 
-          <div class="AHC-localCity">{{localCity}}市</div>
+          <div class="AHC-localCity">{{isDetail?district:localCity}}</div>
         </div>
 
 
@@ -86,11 +86,15 @@
 export default {
   data() {
     return {
-      localCity: "南京",
+
       temperature: "27",
       isEdit: false,
       isSure: true,
-
+      lat:0,
+      lng:0,
+      district:'',
+      isDetail:false,
+       localCity: '',
     };
   },
   methods: {
@@ -98,26 +102,50 @@ export default {
       return this.$router.go(-1);
     },
     edit() {
-      let isSure = this.isSure;
-      isSure = true;
-      return isSure
+
     },
 
     geolocation () {
-      this.$set(this.data(),'isEdit',true)
-      console.log(this.isEdit)
+      let url = 'https://apis.map.qq.com/ws/location/v1/ip'
+
+      this.$jsonp(url,{
+        key:'TC3BZ-2NT3U-WH6VV-BJS3R-6DIMS-P6FF7',
+        output:'jsonp',
+      }
+
+      ).then(json=>{
+        console.log(json)
+        // this.lat = json.result.location.lat
+        // this.lng = json.result.location.lng
+        if(json.result.ad_info.district){
+          this.isDetail = true
+          this.district = json.result.ad_info.district
+        }else{
+          // 当定位信息出现错误，无法精确到区，改为显示市区的天气
+          this.localCity = json.result.ad_info.city
+
+        }
+
+
+      })
+    //  this.$http.get('https://apis.map.qq.com/ws/location/v1/ip?key=TC3BZ-2NT3U-WH6VV-BJS3R-6DIMS-P6FF7').then(res=>{
+    //    console.log(res)
+    //  })
+            },
+deleteCity () {
+      this.isSure = !this.isSure
 
     },
-    deleteCity () {
-      this.isSure = !this.isSure
-    //  let rotateCancel =  this.$refs.rotateCancel
-    //  console.log(rotateCancel)
-    //  rotateCancel.style.transform = "rotate(180deg)"
-    },
     addCity () {
-      this.$router.push('/weather/select/addcity')
+      this.$router.push('/weather/selectcity')
     }
-  },
+
+    },
+
+
+    mounted() {
+      this.geolocation()
+        },
   computed: {
     // isEdit() {
     //   let edit = this.edit

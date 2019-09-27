@@ -25,6 +25,10 @@ export default {
     goToSelect() {
       return this.$router.push("/weather/select");
     }
+  },
+  created () {
+      console.log(localStorage.getItem('hasCity'))
+
   }
 };
 </script>
@@ -35,7 +39,7 @@ export default {
 
   height: 750px;
   z-index: -1;
-  background: url("https://images.pexels.com/photos/561463/pexels-photo-561463.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500")
+  background: url("https://images.pexels.com/photos/2873992/pexels-photo-2873992.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500")
     no-repeat;
 }
 .select-box{

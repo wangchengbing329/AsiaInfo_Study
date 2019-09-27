@@ -3,10 +3,10 @@ import Router from 'vue-router'
 import Weather from '@/components/weather'
 import Mine from '@/components/mine'
 import Select from '@/components/childrenPages/select/select'
-import AddCity from '@/components/childrenPages/addCity/addCity'
+import SelectCity from '@/components/childrenPages/selectCity/selectCity'
 Vue.use(Router)
 
-export default new Router({
+ const router = new Router({
 mode:'history',
   routes: [
 
@@ -36,10 +36,20 @@ mode:'history',
       name: 'Mine',
       component: Mine
     },{
-      path:'/weather/select/addcity',
-      name:'AddCity',
-      component:AddCity
+      path:'/weather/selectcity',
+      name:'SelectCity',
+      component:SelectCity
     }
 
   ]
 })
+
+// router.beforeEach((to,from,next)=>{
+//   console.log(to.name)
+//   // next({path:'/selectcity'})
+//   return
+// })
+
+
+
+export default router
