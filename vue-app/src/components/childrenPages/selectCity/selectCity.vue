@@ -56,12 +56,12 @@ export default {
       // let cities = []
       this.hasCity.unshift(city)
       // console.log(this.hasCity)
-
+      localStorage.hasCity = this.hasCity
       // console.log(ci[0])
       // console.log(localStorage.getItem('hasCity'))
-      // setTimeout(()=>{
-      //     this.$router.replace({name:'Weather'})
-      // },1000)
+      setTimeout(()=>{
+          this.$router.replace({name:'Weather'})
+      },1000)
 
 
     },
@@ -106,11 +106,7 @@ export default {
         }
       });
   },
-  updated() {
-    console.log(this.hasCity)
-localStorage.setItem('hasCity',[... new Set(this.hasCity)])
-console.log(localStorage.getItem('hasCity'))
-  },
+
   computed: {
     geo_opreator() {
       let _city = localStorage.getItem("geo_city");
