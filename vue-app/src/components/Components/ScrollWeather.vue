@@ -108,8 +108,8 @@ export default {
     });
     this.$http.get(`https://free-api.heweather.net/s6/weather/forecast?location=${localCity}&key=5eb51416bfcf4437b13f778b9e41e154`).then(res=>{
       // console.log(res);
-      this.sr = res.data.HeWeather6[0].daily_forecast[0].sr
-      this.ss = res.data.HeWeather6[0].daily_forecast[0].ss
+      this.sr = res.data.HeWeather6[0].daily_forecast[0].sr;
+      this.ss = res.data.HeWeather6[0].daily_forecast[0].ss;
       // this.getImg()
     })
 

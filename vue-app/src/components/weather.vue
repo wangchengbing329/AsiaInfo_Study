@@ -6,7 +6,7 @@
     <!-- 顶部选择城市部分 点击加号切换至选择城市界面 -->
     <div class="select-box">
       <img src="../assets/imgs/page-weather/add.png" alt class="select" @click="goToSelect" />
-      <div class="selected-city">{{city[0]}}市</div>
+      <div class="selected-city">{{city[0]}}</div>
     </div>
 <!-- 显示天气温度部分 -->
     <div class="temperature">
@@ -63,21 +63,94 @@ export default {
     },
     setScroll(scroll){
       this.scroll = scroll
-    }
+    },
+    // removeUndefined(arr){
+    //   for (i=0;i<arr.length;i++){
+    //     if(arr[i] == "undefined"){
+    //       arr.splice(i,1);
+    //       i--;
+    //     }
+    //   }
+    //     return arr
+    // }
   },
   created () {
-    if ( localStorage.hasCity === '' && localStorage.geo_city === ''){
-        this.city.unshift('南京')
+    // let cities = [];
+    // 点击热门城市选择的城市
+    let _hasCity = localStorage.getItem('hasCity');
+    // 不精确定位的城市
+    let _geoCity = localStorage.getItem('geo_city');
+    // 精确定位的城市
+    let _geoDistrict = localStorage.getItem('geo_district');
+    // 搜索的城市
+    let _queryCity = localStorage.getItem('queryCity');
+
+    let queryHasCity = this.$route.query.queryHasCity;
+    let queryGeo_City = this.$route.query.geo_city;
+    let queryGeo_district = this.$route.query.geo_district;
+    let queryCity = this.$route.query.queryCity;
+    // console.log(_hasCity,_geoCity,queryCity,_geoDistrict)
+
+    // if(_hasCity === '' &&  _geoCity === '' && queryCity === '' &&_geoDistrict === ''){
+    //   // 默认城市南京
+    //   this.city.unshift('南京')
+    // }else if(_hasCity == 0 && _geoCity != 0 &&queryCity ==0 &&_geoDistrict ==0){
+    //   cities.unshift(_geoCity)
+    // } else if(_hasCity !=0 && _geoCity ==0 &&queryCity ==0 &&_geoDistrict ==0){
+    //   cities.unshift(_hasCity)
+    // }else if(_hasCity ==0 &&  _geoCity ==0 && queryCity !=0 &&_geoDistrict ==0){
+    //   cities.unshift(queryCity)
+    //   console.log(cities)
+    // }else {
+    //   cities.unshift(_geoDistrict )
+
+    // }
+    if(_geoDistrict == queryGeo_district){
+
+     localStorage.thisCity = _geoDistrict;
+    }else if(_hasCity ==queryHasCity){
+
+     localStorage.thisCity = _hasCity;
+    }else if(_geoCity == queryGeo_City){
+
+     localStorage.thisCity = _geoCity;
+    }else if(queryCity == _queryCity){
+
+     localStorage.thisCity = _queryCity
     }
-    else if (localStorage.hasCity !==  '') {
-        this.city.unshift(localStorage.hasCity)
-    }else {
-        this.city.unshift(localStorage.geo_city)
+    // console.log(cities)
+
+    for(let i=0;i<this.city.length;i++){
+      // let a ;
+      if(typeof(this.city[i]) === "undefined"){
+       this.city.splice(i,1)
+        i--;
+      }
+
     }
+    // let _cities = JSON.stringify(cities)
+    // localStorage.setItem('cities',_cities)
+    // let _city = JSON.parse(localStorage.cities)
+    // console.log(_city)
+    // if (_city === cities){
+    //   this.city = _city
+    // }else {
+    //   let arr = [...new Set(cities,_city)]
+    //   localStorage.cities = arr
+    //   this.city = arr
+    // }
+
+
+    // let a = this.$route.query;
+    // console.log(a)
       // console.log(localStorage.getItem('hasCity'))
+    this.city.unshift(localStorage.getItem('thisCity'))
 
   },
   mounted () {
+    // console.log(localStorage.cities)
+    // console.log(this.city)
+
     let city = this.city[0]
     this.$http.get(`https://free-api.heweather.net/s6/weather/now?location=${city}&key=5eb51416bfcf4437b13f778b9e41e154`).then(res=>{
       // console.log(res)
@@ -101,6 +174,7 @@ export default {
       }
       })
   },
+
   computed: {
 
   }
@@ -199,9 +273,7 @@ border-radius: 20px;
 /* margin-top: 0.3rem; */
 margin-right: 0.3rem;
 }
-.hum{
-  /* margin-top:0.3rem; */
-}
+
 .exlellent{
   background-color: #207561;
 }

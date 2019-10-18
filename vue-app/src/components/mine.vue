@@ -21,6 +21,13 @@
         <div class="login" @click="login">点击登陆</div>
       </div>
   </div>
+
+  <div class="optionsWrapper">
+    <div class="options" v-for="(item,key) in options" :key="key">
+      <img :src="showIcon(item.name)" alt="">
+      <span class="optionName">{{item.title}}</span>
+    </div>
+  </div>
   </div>
 </template>
 
@@ -28,22 +35,38 @@
 export default {
   data () {
     return {
-      isLogin:false
+      isLogin:false,
+      options:[
+        {title:'会员中心',name:'vip'},
+        {title:'卡通助手',name:'zhushou-'},
+        {title:'皮肤商铺',name:'shop'},
+        {title:'钱包',name:'wallet'},
+        {title:'设置',name:'setting'}
+
+
+      ]
     }
   },
   methods:{
     login () {
       this.isLogin = true
+    },
+    showIcon(item){
+      return require(`@/assets/imgs/mine/${item}.png`)
     }
   }
-          
+
 
 }
 </script>
 
-<style>
+<style >
 .mine{
-  position: relative;
+  position: absolute;
+  background-color:#f5f5f5;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
 
 }
 .avatarBox{
@@ -82,5 +105,34 @@ export default {
 .nickname-wrapper{
   font-size:1.2rem;
   margin-left: 0.5rem;
+}
+.optionsWrapper{
+  position: absolute;
+  background-color: #fff;
+  border-radius: 10px;
+  width: 95%;
+  left: 0;
+  right: 0;
+  /* bottom: 0; */
+  top: 10rem;
+  margin: 0 auto;
+}
+.optionsWrapper:nth-child(1){
+  margin-top: 3rem;
+}
+.options{
+  display: flex;
+  height: 3rem;
+  align-items: center;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.options img{
+  height: 1.5rem;
+  width: 1.5rem;
+  margin-left: 1rem;
+}
+.optionName{
+  margin-left: 2rem;
 }
 </style>

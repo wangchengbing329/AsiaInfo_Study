@@ -44,9 +44,10 @@
         <div class="AHC-left">
 
           <div class="cancelCircle"  @click="deleteCity" ref="rotateCancel">
-            <transition name="rotateLine">
+            <transition name="rotateLine" @before-enter="beforeRotate" @enter="rotate" @after-enter="afterRotate" >
             <div v-if="isSure" class="cancelLine"></div>
-            <div v-else class="justifyLine"></div></transition>
+            <div v-else class="justifyLine"></div>
+            </transition>
           </div>
 
           <div class="AHC-localCity">{{isDetail?district:localCity}}</div>
@@ -114,7 +115,7 @@ export default {
       }
 
       ).then(json=>{
-        console.log(json)
+        // console.log(json)
         // this.lat = json.result.location.lat
         // this.lng = json.result.location.lng
         if(json.result.ad_info.district){
@@ -132,14 +133,24 @@ export default {
     //    console.log(res)
     //  })
             },
-deleteCity () {
+  deleteCity () {
       this.isSure = !this.isSure
 
     },
     addCity () {
       this.$router.push('/weather/selectcity')
-    }
+    },
+    //动画
+    beforeRotate(el) {
+      console.log(el)
+       el.style.opacity = 0
+    },
+    rotate(el) {
 
+    },
+    afterRotate(el){
+
+    }
     },
 
 
@@ -274,8 +285,7 @@ deleteCity () {
   letter-spacing: 0.1rem;
   margin-left: 1rem;
 }
-.select-another-header{
-}
+
 .another-header{
   font-size: 1.2rem;
   display: flex;
@@ -359,7 +369,7 @@ margin-right: 1rem;
 line-height: 2rem;
 }
 .rotateLine-enter-active,.rotateLine-leave-to{
-  transform: rotateZ(180deg)
+  transform: rotateZ(180deg);
 }
 
 </style>
