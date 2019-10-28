@@ -4,6 +4,7 @@
 
   <div id="Weather">
     <!-- 顶部选择城市部分 点击加号切换至选择城市界面 -->
+
     <div class="select-box">
       <img src="../assets/imgs/page-weather/add.png" alt class="select" @click="goToSelect" />
       <div class="selected-city">{{city[0]}}</div>
@@ -89,6 +90,8 @@ export default {
     let queryGeo_City = this.$route.query.geo_city;
     let queryGeo_district = this.$route.query.geo_district;
     let queryCity = this.$route.query.queryCity;
+      console.log(_queryCity,queryCity)
+
     // console.log(_hasCity,_geoCity,queryCity,_geoDistrict)
 
     // if(_hasCity === '' &&  _geoCity === '' && queryCity === '' &&_geoDistrict === ''){
@@ -107,16 +110,16 @@ export default {
     // }
     if(_geoDistrict == queryGeo_district){
 
-     localStorage.thisCity = _geoDistrict;
+     localStorage.thatCity = _geoDistrict;
     }else if(_hasCity ==queryHasCity){
 
-     localStorage.thisCity = _hasCity;
+     localStorage.thatCity = _hasCity;
     }else if(_geoCity == queryGeo_City){
 
-     localStorage.thisCity = _geoCity;
+     localStorage.thatCity = _geoCity;
     }else if(queryCity == _queryCity){
 
-     localStorage.thisCity = _queryCity
+     localStorage.setItem('thatCity',_queryCity)
     }
     // console.log(cities)
 
@@ -144,7 +147,9 @@ export default {
     // let a = this.$route.query;
     // console.log(a)
       // console.log(localStorage.getItem('hasCity'))
-    this.city.unshift(localStorage.getItem('thisCity'))
+      console.log(localStorage.thatCity)
+      // localStorage.removeItem('thatCity')
+    this.city.unshift(localStorage.getItem('thatCity'))
 
   },
   mounted () {

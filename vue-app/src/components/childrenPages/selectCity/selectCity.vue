@@ -226,13 +226,14 @@ export default {
       // ul.style.display = 'none'
       // 当选择了城市之后清空数组
       localStorage.setItem('queryCity',hasShowValue)
-      this.showCities = []
       this.$router.replace({
         name:'Weather',
         query:{
           queryCity:hasShowValue
         }
       })
+      this.showCities = []
+
     }
   },
   mounted() {

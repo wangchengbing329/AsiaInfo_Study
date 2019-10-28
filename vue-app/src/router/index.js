@@ -7,13 +7,19 @@ import SelectCity from '@/components/childrenPages/selectCity/selectCity'
 Vue.use(Router)
 
  const router = new Router({
-mode:'history',
+  mode:'history',
   routes: [
+    {
+      path:'/',
+      redirect:'/weather'
+    },
+
 
     {
       path: '/weather',
       name: 'Weather',
       component: Weather,
+
       // children:[
       //   {
       //     path:'select',
@@ -44,11 +50,17 @@ mode:'history',
   ]
 })
 
-// router.beforeEach((to,from,next)=>{
-//   console.log(to.name)
-//   // next({path:'/selectcity'})
-//   return
-// })
+router.beforeEach((to,from,next)=>{
+  // console.log(to.name)
+  // console.log(localStorage.thatCity)
+  if(typeof(localStorage.thatCity) === 'undefined' && to.name !=='SelectCity'){
+    // to.name = SelectCity
+    next({ name:'SelectCity'})
+    // return to.name
+  }
+  next()
+
+})
 
 
 
