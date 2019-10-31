@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <script src="https://cdn.bootcss.com/echarts/4.4.0-rc.1/echarts-en.common.js"></script>
+        <title>Document</title>
+</head>
+<style>
+#main{
+        width: 600px;
+        height: 400px;
+        /* background-color: #2c343c; */
+}
+
+</style>
+<body>
+        <div id="main"></div>
+        <script>
+        const main = document.getElementById('main')
+        const myEchart = echarts.init(main,'dark')
+
+        let options ={
+                // backgroundColor: '#2c343c',
+                textStyle:{
+                        color:'rgba(255,255,255,.3)'
+                },
+                visualMap: {
+                        show: false,
+                        min: 80,
+                        max: 600,
+                        inRange: {
+                        colorLightness: [0, 1]
+                        }
+                },
+                series:[{
+                        name:'收入来源',
+                        type:'scatter',
+                        radius:'50%',
+                        // roseType:'angel',
+                        itemStyle:{
+                                // color:'red',
+                                shawdowBlur:200,
+                                shadowOffsetX:0,
+                                shadowOffsetY:0,
+                                shadowColor:'rgba(0,0,0,.5)'
+                        },
+                        label:{
+                        textStyle:{
+                                color:'rgba(255, 255, 255, 0.3)'
+                        }
+                        },
+                        labelLine: {
+                                lineStyle: {
+                                color: 'rgba(255, 255, 255, 0.3)'
+                                 }
+                        },
+                        emphasis:{
+                                itemStyle:{
+                                        color:'blue'
+                                },
+                                label:{
+                                        show:true,
+                                        formatter:'hello'
+                                }
+                        },
+                        data:[
+                                {value:134,name:'写作'},
+                                {value:236,name:'上班'},
+                                {value:15,name:'画画'},
+                                {value:16,name:'卖唱'},
+                                {value:74,name:'送外卖'},
+                                {value:36,name:'收银'},
+                                {value:304,name:'收破烂'},
+
+                        ]
+                }]
+        }
+        myEchart.setOption(options)
+        
+        </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <script src="https://cdn.bootcss.com/echarts/4.4.0-rc.1/echarts-en.common.js"></script>
+        <title>first-demo</title>
+</head>
+<!-- <style>
+#main{
+width: 600px;
+height: 400px;
+}
+</style> -->
+<body>
+       <div id="main" style="width:600px;height:400px; "></div> 
+
+       <script type="text/javascript">
+        // const main = document.getElementById('main')
+       const myEchart = echarts.init(document.getElementById('main'))
+       let options = {
+               title:{ text:  'Study Echarts'},
+               tooltip:{},
+               legend:{
+                       data:['销量','饮料']
+               },
+               xAxis:{
+                       data:['衬衫','羊毛衫','雪纺衫','裤子','高跟鞋','袜子','帽子'],
+                //        data:['矿泉水','可乐','咖啡','绿茶','红茶','奶茶']
+               },
+               yAxis:{
+                      
+               },
+               series:[{
+                       name:'销量',
+                       type:'bar',
+                       data:[5,20,36,45,10,10,8]
+               }
+        //        ,{
+        //                name:'饮料',
+        //                type:'bar',
+        //                data:[25,30,45,26,18,7]
+        //        }
+        ]
+       }
+       myEchart.setOption(options);
+       
+       </script>
+</body>
+
+</html>
