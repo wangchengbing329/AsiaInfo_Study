@@ -3,10 +3,13 @@ const Schema = mongoose.Schema;
 let cityName = Schema.Types.String;
 // let  cityId = Schema.Types.ObjectId
 const citySchema = new Schema({
+        city:{
+                type:String,default:'南京'
+        },
  CityName :{
-         index:true,
-         unique:true,
-         type:cityName
+        type:[String],
+        // index:true,
+        default:[]
  },
 //  CityId :cityId
 

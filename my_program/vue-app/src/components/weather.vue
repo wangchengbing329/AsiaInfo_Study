@@ -65,15 +65,19 @@ export default {
     setScroll(scroll){
       this.scroll = scroll
     },
-    // removeUndefined(arr){
-    //   for (i=0;i<arr.length;i++){
-    //     if(arr[i] == "undefined"){
-    //       arr.splice(i,1);
-    //       i--;
-    //     }
-    //   }
-    //     return arr
-    // }
+    addCity(cityname){
+      this.$http({
+        url:'http://localhost:3000/addCity',
+        method:'post',
+        data:{
+          cityId:cityname
+        }
+      }).then(res=>{
+        console.log(res)
+      }).catch(err=>{
+        console.log(err)
+      })
+    }
   },
   created () {
     // let cities = [];
@@ -111,6 +115,7 @@ export default {
     if(_geoDistrict == queryGeo_district){
 
      localStorage.thatCity = _geoDistrict;
+
     }else if(_hasCity ==queryHasCity){
 
      localStorage.thatCity = _hasCity;
@@ -147,6 +152,7 @@ export default {
     // let a = this.$route.query;
     // console.log(a)
       // console.log(localStorage.getItem('hasCity'))
+      this.addCity(localStorage.thatCity)
       console.log(localStorage.thatCity)
       // localStorage.removeItem('thatCity')
     this.city.unshift(localStorage.getItem('thatCity'))

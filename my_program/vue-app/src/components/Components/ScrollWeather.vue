@@ -120,11 +120,6 @@ export default {
 
 <style scoped>
 .weatherScroll{
-
-  /* align-items: center; */
-  /* justify-content: space-around; */
-  /* width: 375px; */
-  /* height: 100px; */
   width: 100%;
 }
 .weatherWrapper{
