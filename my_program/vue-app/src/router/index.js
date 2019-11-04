@@ -4,6 +4,7 @@ import Weather from '@/components/weather'
 import Mine from '@/components/mine'
 import Select from '@/components/childrenPages/select/select'
 import SelectCity from '@/components/childrenPages/selectCity/selectCity'
+import Register from '@/components/childrenPages/register/register'
 Vue.use(Router)
 
  const router = new Router({
@@ -13,8 +14,6 @@ Vue.use(Router)
       path:'/',
       redirect:'/weather'
     },
-
-
     {
       path: '/weather',
       name: 'Weather',
@@ -45,6 +44,10 @@ Vue.use(Router)
       path:'/weather/selectcity',
       name:'SelectCity',
       component:SelectCity
+    },{
+      path:'/mine/register',
+      name:'Register',
+      component:Register
     }
 
   ]

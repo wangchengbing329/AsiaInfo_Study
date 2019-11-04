@@ -19,6 +19,7 @@
         <img src="../assets/imgs/page-mine/defaultAvatar.png" alt="">
         </div>
         <div class="login" @click="login">点击登陆</div>
+        <div class="register" @click="register">注册</div>
       </div>
   </div>
 
@@ -53,6 +54,10 @@ export default {
     },
     showIcon(item){
       return require(`@/assets/imgs/mine/${item}.png`)
+    },
+    register () {
+      console.log(1)
+     return this.$router.push('/mine/register')
     }
   }
 
@@ -96,11 +101,16 @@ export default {
 }
 .login{
   /* color: white; */
-  margin-bottom: 2rem;
+  /* margin-bottom: 2rem; */
   margin-left: 2rem;
   /* align-self: flex-start; */
   font-size: 1.5rem;
-  width: 10rem;
+  width: 8rem;
+  /* height: 1.5rem; */
+}
+.register{
+  text-align: center;
+  font-size: 1.5rem;
 }
 .nickname-wrapper{
   font-size:1.2rem;

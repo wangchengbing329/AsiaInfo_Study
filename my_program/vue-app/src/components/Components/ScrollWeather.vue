@@ -131,13 +131,13 @@ export default {
   width: 375px;
   justify-content: space-around;
 }
-.weatherBox{
+/* .weatherBox{ */
   /* position: absolute; */
 /* width: 90px; */
 /* height: 112px; */
 /* width: 8rem; */
 /* flex:1; */
-}
+/* } */
 .timeHeader{
 text-align: center;
 }

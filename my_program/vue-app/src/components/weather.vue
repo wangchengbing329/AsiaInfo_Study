@@ -32,7 +32,7 @@
       <scroll-weather :localCity= city[0] ref="weatherScroll" @setScroll="setScroll"></scroll-weather>
     </div>
 
-
+<!-- <keep-alive/> -->
   </div>
 
 </template>
