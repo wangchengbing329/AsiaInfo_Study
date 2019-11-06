@@ -280,7 +280,7 @@ export default {
 /*本页面的名称如过长全部采用首写字母缩写 例如 selectCity-page === SCP  */
 #selectCity-page {
   background: url("https://images.pexels.com/photos/2839755/pexels-photo-2839755.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
-  height: 750px;
+  height: 650px;
   position: absolute;
   width: 100%;
   z-index: -1;

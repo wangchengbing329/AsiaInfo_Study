@@ -39,7 +39,7 @@ router.post('/login',async(ctx)=>{
         const login = ctx.request.body
         
         await Register.findOneAndUpdate(login,{'$set':{'isLogin':1}},{'new':true}).then(res=>{
-                // console.log('----',res)
+                console.log('----',res)
                 if(Object.prototype.toString.call(res)  === '[object Null]'){
                         ctx.body ={
                                 code:404,
@@ -51,7 +51,8 @@ router.post('/login',async(ctx)=>{
                         ctx.body = {
                                  code:200,
                                  message:'登陆成功',
-                                isLogin:res.isLogin
+                                isLogin:res.isLogin,
+                                nickname:res.nickname
                         }
                 }
 

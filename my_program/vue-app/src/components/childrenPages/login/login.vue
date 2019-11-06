@@ -50,6 +50,7 @@ methods:{
         }
       })
       localStorage.Login = true
+      localStorage.nickname = res.data.nickname
      }else {
        alert('请检查帐号密码无误后重新输入')
      }

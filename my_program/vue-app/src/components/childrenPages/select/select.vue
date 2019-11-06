@@ -179,8 +179,9 @@ export default {
 <style scoped>
 #select-page {
   background: repeating-linear-gradient(#0f3ea3, #63abe6, #a2ddf8);
-  height: 750px;
+  height: 650px;
   color: white;
+  width: 100%;
 }
 .select-header {
   display: flex;

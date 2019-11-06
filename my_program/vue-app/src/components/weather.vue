@@ -94,7 +94,7 @@ export default {
     let queryGeo_City = this.$route.query.geo_city;
     let queryGeo_district = this.$route.query.geo_district;
     let queryCity = this.$route.query.queryCity;
-      console.log(_queryCity,queryCity)
+      // console.log(_queryCity,queryCity)
 
     // console.log(_hasCity,_geoCity,queryCity,_geoDistrict)
 
@@ -153,7 +153,7 @@ export default {
     // console.log(a)
       // console.log(localStorage.getItem('hasCity'))
       this.addCity(localStorage.thatCity)
-      console.log(localStorage.thatCity)
+      // console.log(localStorage.thatCity)
       // localStorage.removeItem('thatCity')
     this.city.unshift(localStorage.getItem('thatCity'))
 

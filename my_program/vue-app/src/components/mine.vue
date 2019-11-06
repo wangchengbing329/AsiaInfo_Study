@@ -8,7 +8,7 @@
 
         <img src="../assets/imgs/page-mine/girlAvatar.png" alt="">
         </div>
-            <div class="nickname-wrapper">墨友
+            <div class="nickname-wrapper">{{nickname}}
               <div>欢迎使用freeWeather!</div>
             </div>
       </div>
@@ -38,6 +38,7 @@
 export default {
   data () {
     return {
+      nickname:'墨友',
       isLogin:false,
       isGO:false,
       options:[
@@ -67,13 +68,14 @@ export default {
   created(){
    if(localStorage.Login){
      this.isLogin = localStorage.Login
+    this.nickname = localStorage.nickname
    }
   }
 
 }
 </script>
 
-<style >
+<style scoped>
 .mine{
   position: absolute;
   background-color:#f5f5f5;

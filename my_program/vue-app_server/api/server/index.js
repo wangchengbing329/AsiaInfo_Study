@@ -12,7 +12,7 @@ let router = new KoaRouter();
                                 
 app.use(bodyParser())
 app.use(cors())
-                 
+                      
 router.use('/addCity',cityRoute.routes());
 router.use('/register',registerRoute.routes())
                            
