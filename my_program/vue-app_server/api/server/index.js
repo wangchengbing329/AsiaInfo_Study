@@ -4,16 +4,18 @@ const KoaRouter = require('koa-router');
 const bodyParser = require('koa-bodyparser')
 const cors = require('koa2-cors')
 let cityRoute =require('../router/cityRoute.js') 
+let registerRoute =require('../router/registerRoute.js') 
 const {connect} = require('../db/db.init.js')
 const {initSchema} = require('./server.init.js')
 const app =new Koa();
 let router = new KoaRouter();
-
+                                
 app.use(bodyParser())
 app.use(cors())
-
+                 
 router.use('/addCity',cityRoute.routes());
-
+router.use('/register',registerRoute.routes())
+                           
 app.use(router.routes())
 app.use(router.allowedMethods())
 ;(async()=>{
@@ -28,7 +30,7 @@ app.use(router.allowedMethods())
   // console.log('------')
   // console.log(users)
 })()
-
+         
 
 
 app.use(async (ctx)=>{

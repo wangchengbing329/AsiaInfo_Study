@@ -4,7 +4,7 @@
     <!-- 头像框部分 -->
     <div class="avatarBox">
       <div class="avatar" v-if="isLogin">
-        <div class="avatarWrapper">
+        <div class="avatarWrapper" >
 
         <img src="../assets/imgs/page-mine/girlAvatar.png" alt="">
         </div>
@@ -21,6 +21,7 @@
         <div class="login" @click="login">点击登陆</div>
         <div class="register" @click="register">注册</div>
       </div>
+
   </div>
 
   <div class="optionsWrapper">
@@ -29,6 +30,7 @@
       <span class="optionName">{{item.title}}</span>
     </div>
   </div>
+
   </div>
 </template>
 
@@ -37,6 +39,7 @@ export default {
   data () {
     return {
       isLogin:false,
+      isGO:false,
       options:[
         {title:'会员中心',name:'vip'},
         {title:'卡通助手',name:'zhushou-'},
@@ -50,17 +53,22 @@ export default {
   },
   methods:{
     login () {
-      this.isLogin = true
+      // this.isLogin = true
+      this.$router.push('/mine/login')
     },
     showIcon(item){
       return require(`@/assets/imgs/mine/${item}.png`)
     },
     register () {
-      console.log(1)
+      // console.log(1)
      return this.$router.push('/mine/register')
     }
+  },
+  created(){
+   if(localStorage.Login){
+     this.isLogin = localStorage.Login
+   }
   }
-
 
 }
 </script>

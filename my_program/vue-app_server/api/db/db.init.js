@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const db = "mongodb://127.0.0.1:27017/City"
 mongoose.Promise = global.Promise;
+mongoose.set('useFindAndModify',true)
 exports.connect = () =>{
   // 链接数据库
-    mongoose.connect(db,{useNewUrlParser: true,useUnifiedTopology: true})
+    mongoose.connect(db,{useNewUrlParser: true,useUnifiedTopology: true,useFindAndModify: false})
 
     let maxConnectCount = 0;
   return new Promise((resolve,reject)=>{
@@ -12,7 +13,7 @@ exports.connect = () =>{
         console.log('******数据库断开连接********');
         if(maxConnectCount<3){
 
-          mongoose.connect(db,{useNewUrlParser: true,useUnifiedTopology: true})
+          mongoose.connect(db,{useNewUrlParser: true,useUnifiedTopology: true,useFindAndModify: false})
           maxConnectCount++
         }else{
           reject();
@@ -23,7 +24,7 @@ exports.connect = () =>{
       mongoose.connection.on('error',() =>{
         console.log('数据库出现错误!');
         if(maxConnectCount<3){
-          mongoose.connect(db,{useNewUrlParser: true,useUnifiedTopology: true})
+          mongoose.connect(db,{useNewUrlParser: true,useUnifiedTopology: true,useFindAndModify: false})
           maxConnectCount++
         }else{
           reject();

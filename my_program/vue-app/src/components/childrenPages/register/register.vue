@@ -27,6 +27,7 @@
     </div>
     </div>
     <div class="submit" @click="submit">提交</div>
+
   </div>
 </template>
 
@@ -55,9 +56,14 @@ export default {
     }
  },
  methods:{
-   sumbit () {
+   submit () {
+     if(!this.nickname && !this.password &&!this.Repassword &&!this.phoneNumber &&!this.email){
+       alert('您还有未完成项！')
+     }else{
+
+
      this.$http({
-       url:'http://localhost:3000/addCity',
+       url:'http://localhost:3000/register/register',
        method:'post',
        data:{
          nickname:this.nickname,
@@ -69,10 +75,16 @@ export default {
 
 
      }).then(res=>{
-
+       console.log(res)
+       switch(res.data.code){
+         case 200: return  alert('注册成功',setTimeout(()=>{this.$router.go(-1)},1000));break;
+         case 403: return alert('帐号已经存在');break;
+         case 500: return alert('服务器故障');break;
+       }
      }).catch(err=>{
        console.log(err)
      })
+   }
    }
  }
 }
@@ -91,7 +103,7 @@ z-index: -1;
 .title{
   color: white;
   text-align: center;
-  margin-top: 6rem;
+  margin-top: 3rem;
 }
 .inputInfo{
   margin-top: 5rem;

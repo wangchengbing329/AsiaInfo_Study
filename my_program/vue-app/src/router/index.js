@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
 import Weather from '@/components/weather'
 import Mine from '@/components/mine'
 import Select from '@/components/childrenPages/select/select'
 import SelectCity from '@/components/childrenPages/selectCity/selectCity'
-import Register from '@/components/childrenPages/register/register'
+import Register from '@/components/childrenPages/register/register';
+import Login from '@/components/childrenPages/login/login';
 Vue.use(Router)
 
  const router = new Router({
@@ -39,7 +41,8 @@ Vue.use(Router)
     {
       path: '/mine',
       name: 'Mine',
-      component: Mine
+      component: Mine,
+
     },{
       path:'/weather/selectcity',
       name:'SelectCity',
@@ -48,6 +51,11 @@ Vue.use(Router)
       path:'/mine/register',
       name:'Register',
       component:Register
+    },
+    {
+      path:'/mine/login',
+      name:'Login',
+      component:Login
     }
 
   ]
