@@ -6,10 +6,10 @@
         <h2 class="loginTitle">用户登陆</h2>
         <el-form :model="ruleForm" name="login" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="loginForm" size="mini">
             <el-form-item label="账号:" prop="checkAccount">
-                <el-input type="text" v-model="ruleForm.checkAccount" autocomplete="off"></el-input>
+                <el-input type="text" placeholder="请输入你的账号/手机号" v-model="ruleForm.checkAccount" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item label="密码:" prop="pass" >
-                <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
+                <el-input type="password" placeholder="请输入你的密码" v-model="ruleForm.pass" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item>
             <el-button type="primary" @click="submitForm('ruleForm')">登陆</el-button>
@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import {Loading, Message} from 'element-ui'
 export default {
   name: 'Login',
   data () {
@@ -60,18 +61,49 @@ export default {
   },
   methods: {
     submitForm (ruleForm) {
-      console.log(ruleForm)
-      this.$http.post({
-        // 'url'
+      let loginInfo
+      if (this.ruleForm.checkAccount.length === 11) {
+        loginInfo = {
+          tel: this.ruleForm.checkAccount,
+          pass: this.ruleForm.pass
+        }
+      } else {
+        loginInfo = {
+          account: this.ruleForm.checkAccount,
+          pass: this.ruleForm.pass
+        }
+      }
+      this.$http({
+        method: 'post',
+        data: loginInfo,
+        url: 'http://localhost:3000/user/login'
+      }).then(res => {
+        console.log(res)
+        if (res.data.ret_code === 200) {
+          sessionStorage.role = res.data.role
+          let loading = Loading.service({
+            fullscreen: true,
+            text: '登陆中...'
+          })
+          setTimeout(() => {
+            loading.close()
+            this.$router.replace({name: 'Index'})
+          }, 3000)
+          // clearTimeout(toIdnex)
+        } else if (res.data.ret_code === 404) {
+          Message({
+            type: 'warning',
+            message: '未找到该用户的信息！',
+            duration: 1500
+          })
+        } else {
+          Message({
+            type: 'error',
+            message: '服务器故障，请稍后再试！',
+            duration: 1500
+          })
+        }
       })
-      // this.$refs[ruleForm].validate((valid) => {
-      //   if (valid) {
-      //     alert('submit!')
-      //   } else {
-      //     console.log('error submit!!')
-      //     return false
-      //   }
-      // })
     },
     register () {
       this.$router.push({name: 'Register'})

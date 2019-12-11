@@ -6,5 +6,7 @@ const userSchema = new Schema({
         tel:Schema.Types.String,
         account:Schema.Types.String,
         pass:Schema.Types.String
+},{
+        collection:'users'
 })
 mongoose.model('users',userSchema)

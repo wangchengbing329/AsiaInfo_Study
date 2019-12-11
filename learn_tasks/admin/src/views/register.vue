@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import {MessageBox} from 'element-ui'
 export default {
   name: 'register',
   data () {
@@ -50,7 +51,7 @@ export default {
       }
     }
     const validatePassword = (rule, value, callback) => {
-      console.log(value)
+      // console.log(value)
       if (value === '') {
         callback(new Error('请再次输入密码'))
       } else if (value !== this.ruleForm.pass) {
@@ -94,18 +95,51 @@ export default {
   },
   methods: {
     submitForm (ruleForm) {
-      console.log(ruleForm)
-      this.$http.post({
-        // 'url'
-      })
-      // this.$refs[ruleForm].validate((valid) => {
-      //   if (valid) {
-      //     alert('submit!')
-      //   } else {
-      //     console.log('error submit!!')
-      //     return false
-      //   }
-      // })
+      let userInfo = {
+        role: 'U',
+        tel: this.ruleForm.checkTel,
+        account: this.ruleForm.checkAccount,
+        pass: this.ruleForm.checkPass
+      }
+      if (this.ruleForm.pass === '' || this.ruleForm.checkAccount === '' || this.ruleForm.checkTel === '' || this.ruleForm.checkPass === '') {
+        MessageBox({
+          type: 'warning',
+          message: '你还有未完成项'
+        })
+      } else {
+        this.$http({
+          url: 'http://localhost:3000/user/register',
+          method: 'post',
+          data: userInfo
+        }).then(res => {
+          console.log(res)
+          if (res.data.ret_code === 200) {
+            MessageBox({
+              message: '注册成功',
+              type: 'success',
+              showClose: true,
+              showConfirmButton: true,
+              callback: (confirm, instanse) => {
+                this.$router.replace({name: 'Login'})
+              }
+            })
+          } else if (res.data.ret_code === 403) {
+            MessageBox({
+              message: '该用户已经存在！',
+              type: 'warning',
+              showClose: true,
+              showConfirmButton: true
+            })
+          } else {
+            MessageBox({
+              message: '服务器出现故障，请稍后再试',
+              type: 'error',
+              showConfirmButton: true,
+              showClose: true
+            })
+          }
+        })
+      }
     },
     back () {
       this.$router.go(-1)
@@ -124,7 +158,6 @@ export default {
   width: 100%;
   .register-wrapper{
     width: 600px;
-
     .registerForm-wrapper{
       position: absolute;
       width: 400px;
