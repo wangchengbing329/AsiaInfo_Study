@@ -80,7 +80,9 @@ export default {
       }).then(res => {
         console.log(res)
         if (res.data.ret_code === 200) {
-          sessionStorage.role = res.data.role
+          sessionStorage.role = res.data.data.role
+          sessionStorage.userId = res.data.data.account
+          // sessionStorage.avatar = res.data.data.avatar
           let loading = Loading.service({
             fullscreen: true,
             text: '登陆中...'

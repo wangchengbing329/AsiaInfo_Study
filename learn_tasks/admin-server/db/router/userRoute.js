@@ -38,7 +38,7 @@ router.post('/login', async (ctx) => {
                         ctx.body = {
                                 ret_code: 200,
                                 message: '登陆成功',
-                                role:res.role
+                                data:res
                         }
                 } else {
                         ctx.body = {

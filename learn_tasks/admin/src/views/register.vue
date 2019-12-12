@@ -17,6 +17,11 @@
             <el-form-item label="请输入手机号：" prop="checkTel">
                 <el-input type="text" v-model="ruleForm.checkTel" autocomplete="off"></el-input>
             </el-form-item>
+            <el-form-item label="请选择所在省份：" prop="region">
+                <el-select v-model="region" placeholder="请选择所在区域">
+                    <el-option v-for="(item,index) in provinceList" :key="item + index" :label="item" :value="item"></el-option>
+                </el-select>
+            </el-form-item>
             <el-form-item>
             <el-button type="primary" @click="submitForm('ruleForm')">注册</el-button>
             <el-button @click="back">返回</el-button>
@@ -71,6 +76,8 @@ export default {
       }
     }
     return {
+      provinceList: [],
+      region: '',
       ruleForm: {
         pass: '',
         checkAccount: '',
@@ -95,11 +102,13 @@ export default {
   },
   methods: {
     submitForm (ruleForm) {
+      // console.log(this.region)
       let userInfo = {
         role: 'U',
         tel: this.ruleForm.checkTel,
         account: this.ruleForm.checkAccount,
-        pass: this.ruleForm.checkPass
+        pass: this.ruleForm.checkPass,
+        address: this.region
       }
       if (this.ruleForm.pass === '' || this.ruleForm.checkAccount === '' || this.ruleForm.checkTel === '' || this.ruleForm.checkPass === '') {
         MessageBox({
@@ -112,7 +121,7 @@ export default {
           method: 'post',
           data: userInfo
         }).then(res => {
-          console.log(res)
+          // console.log(res)
           if (res.data.ret_code === 200) {
             MessageBox({
               message: '注册成功',
@@ -144,6 +153,15 @@ export default {
     back () {
       this.$router.go(-1)
     }
+  },
+  created () {
+    this.$http({
+      method: 'get',
+      url: 'http://localhost:3000/province/getInfo'
+    }).then(res => {
+      // console.log(res)
+      this.provinceList = res.data.list
+    })
   }
 
 }
