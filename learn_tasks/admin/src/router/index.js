@@ -4,6 +4,8 @@ import Router from 'vue-router'
 import Login from '@/views/login'
 import Register from '@/views/register'
 import Index from '@/views/index'
+import UserTable from '@/components/userTable'
+import RegionShow from '@/components/regionShow'
 Vue.use(Router)
 
 export default new Router({
@@ -23,7 +25,18 @@ export default new Router({
     }, {
       path: '/index',
       name: 'Index',
-      component: Index
+      component: Index,
+      children: [
+        {
+          path: '/usertable',
+          name: 'UserTable',
+          component: UserTable
+        }, {
+          path: '/regionshow',
+          name: 'RegionShow',
+          component: RegionShow
+        }
+      ]
     }
   ]
 })

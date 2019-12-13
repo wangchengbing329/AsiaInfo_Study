@@ -155,15 +155,8 @@ export default {
     }
   },
   created () {
-    this.$http({
-      method: 'get',
-      url: 'http://localhost:3000/province/getInfo'
-    }).then(res => {
-      // console.log(res)
-      this.provinceList = res.data.list
-    })
+    this.provinceList = JSON.parse(localStorage.provinces)
   }
-
 }
 </script>
 

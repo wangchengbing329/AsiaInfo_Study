@@ -110,8 +110,18 @@ export default {
     register () {
       this.$router.push({name: 'Register'})
     }
+  },
+  created () {
+    this.$http({
+      method: 'get',
+      url: 'http://localhost:3000/province/getInfo'
+    }).then(res => {
+      // console.log(res)
+      const pList = JSON.stringify(res.data.list)
+      localStorage.provinces = pList
+      // this.provinceList = res.data.list
+    })
   }
-
 }
 </script>
 
