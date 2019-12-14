@@ -2,10 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const provinceSchema = new Schema({
-        ProID: Schema.Types.String,
-        name: Schema.Types.String,
-        ProSort: Schema.Types.String,
-        ProRemark: Schema.Types.String
+        name: {
+                type:String,
+                default: '北京'
+        },
+        value: Number
 },{
         collection: 'provinces'
 })

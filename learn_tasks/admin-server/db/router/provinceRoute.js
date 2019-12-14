@@ -21,5 +21,29 @@ router.get('/getInfo', async (ctx) =>{
                 }
         })
 })
-
+router.get('/proInfo', async (ctx) =>{
+        const Province = mongoose.model('Provinces')
+        await Province.find().exec().then(res => {
+                // console.log(res)
+                let list = [];
+                let info = {};
+                for (let i of res) {
+                        info = {
+                                name:i.name,
+                                value: i.value
+                        }
+                        list.push(info)
+                }
+                ctx.body = {
+                        ret_code: 200,
+                        message: '查询成功',
+                        list:list
+                }
+        } ).catch(err =>{
+                ctx.body = {
+                        ret_code: 500,
+                        message: '服务器故障'
+                }
+        })
+})
 module.exports = router

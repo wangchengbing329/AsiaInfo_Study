@@ -6,8 +6,8 @@ import Register from '@/views/register'
 import Index from '@/views/index'
 import UserTable from '@/components/userTable'
 import RegionShow from '@/components/regionShow'
+import UserEdit from '@/components/UserEdit'
 Vue.use(Router)
-
 export default new Router({
   routes: [
     {
@@ -28,13 +28,17 @@ export default new Router({
       component: Index,
       children: [
         {
-          path: '/usertable',
+          path: 'usertable',
           name: 'UserTable',
           component: UserTable
         }, {
-          path: '/regionshow',
+          path: 'regionshow',
           name: 'RegionShow',
           component: RegionShow
+        }, {
+          path: 'useredit',
+          name: 'UserEdit',
+          component: UserEdit
         }
       ]
     }

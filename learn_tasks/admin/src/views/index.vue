@@ -39,13 +39,13 @@
               <span>用户管理</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index='1-1'> <router-link to="/usertable" >用户表</router-link>  </el-menu-item>
+              <el-menu-item index='1-1'> <router-link to="/index/usertable" >用户表</router-link>  </el-menu-item>
 
             </el-menu-item-group>
           </el-submenu>
           <el-menu-item index='2'>
             <i class='el-icon-menu'></i>
-            <span slot='title'><router-link to="/regionshow" >用户分布</router-link> </span>
+            <span slot='title'><router-link to="/index/regionshow" >用户分布</router-link> </span>
           </el-menu-item>
         </el-menu>
       </el-col>
