@@ -23,13 +23,13 @@
           </div>
           <div class="account" v-else>
           <el-form-item  :label="diaInfo.diaLabel" :label-width="formLabelWidth">
-            <el-input :placeholder="diaInfo.diaPlaceholder" v-model="form.account" autocomplete="off"></el-input>
+            <el-input :placeholder="diaInfo.diaPlaceholder" v-model="form.Account" autocomplete="off"></el-input>
           </el-form-item>
           </div>
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="dialogFormVisible = false">取 消</el-button>
-          <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+          <el-button type="primary" @click="handleSubmitChange(diaInfo.inputType, diaInfo.diaType)">确 定</el-button>
         </div>
       </div>
       <div class="section" v-else-if="diaInfo.diaType === 'section'">
@@ -42,7 +42,7 @@
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="dialogFormVisible = false">取 消</el-button>
-          <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+          <el-button type="primary" @click="handleChangeProvince">确 定</el-button>
         </div>
       </div>
       <div class="uploadName" v-else>
@@ -136,6 +136,57 @@ export default {
     },
     submitUpload () {
       this.$refs.upload.submit()
+    },
+    handleSubmitChange (inputType, diaType) {
+      if (inputType === 'password' && diaType === 'form') {
+        this.$http({
+          method: 'post',
+          data: {
+            searchAccount: sessionStorage.userId,
+            newPass: this.form.pass
+          },
+          url: 'http://127.0.0.1:3000/user/userChange'
+        }).then(res => {
+          if (res.data.ret_code === 200) {
+            this.dialogFormVisible = false
+          } else {
+            this.$message.error('修改失败')
+          }
+        })
+      } else {
+        this.$http({
+          method: 'post',
+          data: {
+            account: sessionStorage.userId,
+            newAccount: this.form.Account
+          },
+          url: 'http://localhost:3000/user/userChange'
+        }).then(res => {
+          if (res.data.ret_code === 200) {
+            sessionStorage.userId = this.form.Account
+            this.$router.go(0)
+            this.dialogFormVisible = false
+          } else {
+            this.$message.error('修改失败')
+          }
+        })
+      }
+    },
+    handleChangeProvince () {
+      this.$http({
+        method: 'post',
+        data: {
+          searchAccount: sessionStorage.userId,
+          newAddress: this.form.region
+        },
+        url: 'http://localhost:3000/user/userChange'
+      }).then(res => {
+        if (res.data.ret_code === 200) {
+          this.dialogFormVisible = false
+        } else {
+          this.$message.error('修改失败')
+        }
+      })
     }
   },
   created () {

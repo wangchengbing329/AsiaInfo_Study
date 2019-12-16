@@ -146,4 +146,117 @@ router.post('/userSet', async ctx => {
         }      
         
 })
+
+router.post('/userChange', async ctx => {
+        const User = mongoose.model('users')
+        let changeInfo = ctx.request.body
+        let newInfo,searchInfo;
+        console.log (changeInfo)
+        if (changeInfo.account) {
+                searchInfo = {
+                        account:changeInfo.account
+                }
+                newInfo = {
+                        account: changeInfo.newAccount
+                }
+                
+        } else if (changeInfo.newPass) {
+                searchInfo = {
+                        account: changeInfo.searchAccount
+                }
+                newInfo = {
+                        pass: changeInfo.newPass
+                }
+
+        } else if (changeInfo.newAddress) {
+                searchInfo = {
+                        account: changeInfo.searchAccount
+                }
+                newInfo = {
+                        address: changeInfo.newAddress
+                }
+        }     
+                await User.updateOne(searchInfo,{'$set': newInfo}).then(res => {
+                        // console.log(res) 
+                        if (res.nModified) {
+                                ctx.body = {
+                                        ret_code : 200,
+                                        ret_message : "更新成功"
+                                }
+                        } else {
+                                ctx.body = {
+                                        ret_code: 400,
+                                        ret_message: "更新失败"
+                                }
+                        }
+                })    
+        
+})
+
+router.post('/account', async ctx => {
+        const User = mongoose.model('users');
+        let adress = ctx.request.body
+        await User.find(adress).then(res =>{
+                console.log(res)
+                if (res) {
+                        ctx.body = {
+                                data: res,
+                                ret_code: 200,
+                                ret_message: '查询成功'
+                        }
+                } else {
+                        ctx.body = {
+                                ret_code: 404,
+                                ret_message: '你所查询的信息未找到'
+                        }
+                }
+        }).catch(err  => {
+                ctx.body = {
+                        ret_code: 503,
+                        ret_message: '服务器故障'
+                }
+        })
+})
+
+router.post('/tabel', async ctx => {
+        let search = ctx.request.body
+        console.log(search)
+        const User = mongoose.model('users')
+        let addressSearch;
+        let roleSearch;
+        switch (search.search) {
+                case '管理员' :  roleSearch = { role: 'M'}; break;
+                case '用户' :  roleSearch = { role: 'U'}; break;
+                default :  addressSearch = { address: search.search}; break;
+        } 
+
+        if (roleSearch) {
+                await User.find(roleSearch).then(res => {
+                        console.log(res)
+                        ctx.body = {
+                                ret_code:200,
+                                list:res
+                        }
+                }).catch(err => {
+                        ctx.body = {
+                                ret_code:404,
+                                err
+                        }
+                })
+        } else {
+                await User.find(addressSearch).then(res =>{
+                        console.log(res)
+                        ctx.body = {
+                                ret_code:200,
+                                list:res
+                        }
+                }).catch(err => {
+                        ctx.body = {
+                                ret_code:404,
+                                err
+                        }
+                })
+        }
+        
+})
 module.exports = router

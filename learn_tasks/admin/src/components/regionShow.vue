@@ -14,7 +14,7 @@ export default {
   },
   created () {
     this.$http.get('http://localhost:3000/province/proInfo').then(res => {
-      console.log(res)
+      // console.log(res)
       this.dataList = res.data.list
       this._initMap()
     })
@@ -31,14 +31,16 @@ export default {
         let name = v.properties.name
         geoCoorMap[name] = v.properties.center
       })
-      const max = 180
-      const min = 9
-      const maxSize4Pin = 100
-      const minSize4Pin = 20
-      const convertData = data => {
+      // const max = 180
+      // const min = 9
+      // const maxSize4Pin = 100
+      // const minSize4Pin = 20
+      let convertData = data => {
         let res = []
         for (let item of data) {
+          // console.log(item, '11111')
           let geoCoord = geoCoorMap[item.name]
+          // console.log(geoCoorMap)
           if (geoCoord) {
             res.push({
               name: item.name,
@@ -46,6 +48,7 @@ export default {
             })
           }
         }
+        // console.log(res, '------')
         return res
       }
       const option = {
@@ -58,20 +61,23 @@ export default {
             decoration: 'none'
           },
           formatter: params => {
-            console.log(params, '----')
-            let tipHtml = `<div style="width:280px;height:180px;background:rgba(22,80,158,0.8);border:1px solid rgba(7,166,255,0.7)">'
-            '<div style="width:100%;height:40px;line-height:40px;border-bottom:2px solid rgba(7,166,255,0.7);padding:0 20px">''<i style="display:inline-block;width:8px;height:8px;background:#16d6ff;border-radius:40px;">''</i>'
-            '<span style="margin-left:10px;color:#fff;font-size:16px;">${params.name}</span>''</div>'
-            '<div style="padding:20px">'
-            '<p style="color:#fff;font-size:12px;">''<i style="display:inline-block;width:10px;height:10px;background:#16d6ff;border-radius:40px;margin:0 8px">''</i>'
-            '单位总数：''<span style="color:#11ee7d;margin:0 6px;">'toolTipData.length'</span>''个''</p>'
-            '<p style="color:#fff;font-size:12px;">''<i style="display:inline-block;width:10px;height:10px;background:#16d6ff;border-radius:40px;margin:0 8px">''</i>'
-            '总人数：''<span style="color:#f48225;margin:0 6px;">'toolTipData.length'</span>''个''</p>'
-            '<p style="color:#fff;font-size:12px;">''<i style="display:inline-block;width:10px;height:10px;background:#16d6ff;border-radius:40px;margin:0 8px">''</i>'
-            '总人数：''<span style="color:#f4e925;margin:0 6px;">'toolTipData.length'</span>''个''</p>'
-            '<p style="color:#fff;font-size:12px;">''<i style="display:inline-block;width:10px;height:10px;background:#16d6ff;border-radius:40px;margin:0 8px">''</i>'
-            '总人数：''<span style="color:#25f4f2;margin:0 6px;">'toolTipData.length'</span>''个''</p>'
-            '</div>''</div>`
+            // console.log(params, '----')
+            let personAccount = {
+              address: params.name
+            }
+            let personNum = sessionStorage[params.name]
+            if (!personNum) {
+              this.$http({method: 'post', data: personAccount, url: 'http://localhost:3000/user/account'}).then(res => {
+                sessionStorage[params.name] = res.data.data.length
+              })
+            }
+            let tipHtml = `<div style="width:280px;height:180px;background:rgba(22,80,158,0.8);border:1px solid rgba(7,166,255,0.7)">
+              <div style="width:100%;height:40px;line-height:40px;border-bottom:2px solid rgba(7,166,255,0.7);padding:0 20px"><i style="display:inline-block;width:8px;height:8px;background:#16d6ff;border-radius:40px;"></i>
+              <span style="margin-left:10px;color:#fff;font-size:16px;">${params.name}</span></div>
+              <div style="padding:20px">
+              <p style="color:#fff;font-size:12px;"><i style="display:inline-block;width:10px;height:10px;background:#16d6ff;border-radius:40px;margin:0 8px"></i>
+              地区人数：<span style="color:#11ee7d;margin:0 6px;">${personNum}</span>个</p>
+              </div></div>`
             return tipHtml
           }
         },
@@ -80,10 +86,10 @@ export default {
           map: 'china',
           label: {
             normal: {
-              show: true
+              show: false
             },
             emphasis: {
-              show: true
+              show: false
             }
           },
           roam: false,
@@ -114,7 +120,10 @@ export default {
           type: 'scatter',
           coordinateSystem: 'geo',
           data: convertData(this.dataList),
-          symbolSize: val => val[2] / 10,
+          symbolSize: val => {
+            console.log(val)
+            return val[2] / 10
+          },
           label: {
             normal: {
               formatter: '{b}',

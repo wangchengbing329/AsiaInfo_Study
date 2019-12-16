@@ -1,7 +1,7 @@
 <template>
     <!-- :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))" -->
 <div id="userTable"> <el-table
-    :data ="tableData.slice((currentPage - 1) * pageSize, currentPage *pageSize)"
+    :data ="tableData.slice(($store.state.currentPage - 1) * pageSize, $store.state.currentPage *pageSize)"
     style="width: 100%">
     <el-table-column
       label="序号"
@@ -30,9 +30,10 @@
       align="right">
       <template slot="header" slot-scope="scope">
         <el-input
-          v-model="search"
+          v-model.lazy="search"
           size="mini"
-          placeholder="输入关键字搜索"/>
+          placeholder="输入关键字搜索"
+          @change="searchTable"/>
       </template>
       <template slot-scope="scope">
         <el-button
@@ -63,13 +64,13 @@ export default {
     return {
       tableData: [],
       search: '',
-      currentPage: 1,
+      currentPage: this.$store.state.currentPage,
       pageSize: 7
     }
   },
   methods: {
     handleEdit (index, row) {
-      console.log(index, row)
+      // console.log(index, row)
       this.$router.push({name: 'UserEdit',
         query: {
           account: row.account
@@ -108,7 +109,8 @@ export default {
       return parseInt(index) + 1
     },
     handleCurrentChange (val) {
-      this.currentPage = val
+      this.$store.commit('changeCurrent', val)
+      // this.currentPage = val
     },
     _initData () {
       this.$http.get('http://localhost:3000/user/userinfo').then(res => {
@@ -124,6 +126,30 @@ export default {
             role: datalist[index].role
           }
 
+          this.tableData.push(data)
+        }
+      })
+    },
+    searchTable () {
+      this.$http({
+        method: 'post',
+        data: {
+          search: this.search
+        },
+        url: 'http://localhost:3000/user/tabel'
+      }).then(res => {
+        console.log(res)
+        let data = null
+        const datalist = res.data.list
+        this.tableData = []
+        for (let index in datalist) {
+          data = {
+            index,
+            account: datalist[index].account,
+            address: datalist[index].address,
+            tel: datalist[index].tel,
+            role: datalist[index].role
+          }
           this.tableData.push(data)
         }
       })

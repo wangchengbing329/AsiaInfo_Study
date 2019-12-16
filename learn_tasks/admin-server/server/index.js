@@ -12,20 +12,20 @@ const router = new Router();
               
 app.use(bodyParser());
 app.use(cors());
-                         
+                              
 router.use('/user',userRoute.routes());
 router.use('/province',provinceRoute.routes());
- 
+  
 app.use(router.routes());
 app.use(router.allowedMethods());
-
+ 
 ;(async ()=>{
       await connect();
         initSchema();
          
 })();
 
-  
+             
  
 app.listen(3000,()=>{
         console.log('Server is running on port 3000')
