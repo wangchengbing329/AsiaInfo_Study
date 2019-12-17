@@ -1,0 +1,19 @@
+{
+  "name": "webpack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "test1.js",
+  "scripts": {
+    "dev": "webpack-box dev",
+    "build": "webpack-box build",
+    "dll": "webpack-box dll",
+    "build:ssr": "webpack-box build:ssr",
+    "ssr:server": "webpack-box ssr:server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "webpack-box": "^1.0.6"
+  }
+}
